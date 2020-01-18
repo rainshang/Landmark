@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Landmark</string>
+    <string name="tip_account_info">You\'ve logged in as %1$s</string>
+    <string name="tip_location_permission_err">%1$s cannot work without location permission</string>
+</resources>

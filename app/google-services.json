@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "500459847289",
+    "firebase_url": "https://landmark-1579338962774.firebaseio.com",
+    "project_id": "landmark-1579338962774",
+    "storage_bucket": "landmark-1579338962774.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500459847289:android:2c60de1a85f6d67f1fdea8",
+        "android_client_info": {
+          "package_name": "com.xyx.landmark"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "500459847289-l9ckdmhvln35b5n4hmtn2m47bojodb1n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1KnOS_DnPfmdrTWEMtbMsrLYxbCvu3MU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "500459847289-l9ckdmhvln35b5n4hmtn2m47bojodb1n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
