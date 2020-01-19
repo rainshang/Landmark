@@ -13,25 +13,15 @@
           "package_name": "com.xyx.landmark"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "500459847289-l9ckdmhvln35b5n4hmtn2m47bojodb1n.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD1KnOS_DnPfmdrTWEMtbMsrLYxbCvu3MU"
+          "current_key": "AIzaSyBPW82bid33XDxyF2sIDyxdq1htlZjdu3o"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "500459847289-l9ckdmhvln35b5n4hmtn2m47bojodb1n.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

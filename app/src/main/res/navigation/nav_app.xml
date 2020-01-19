@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_app"
     app:startDestination="@id/checkAuthFragment">
 
@@ -21,6 +22,24 @@
     </fragment>
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.xyx.landmark.ui.MapFragment"
-        android:label="MapFragment" />
+        android:name="com.xyx.landmark.ui.map.MapFragment"
+        android:label="MapFragment"
+        tools:layout="@layout/fragment_map">
+        <action
+            android:id="@+id/action_mapFragment_to_noteFragment"
+            app:destination="@id/noteFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteFragment"
+        android:name="com.xyx.landmark.ui.note.NoteFragment"
+        android:label="fragment_note"
+        tools:layout="@layout/fragment_note">
+        <argument
+            android:name="loc"
+            app:argType="com.xyx.landmark.vo.User$Note$Loc" />
+    </fragment>
 </navigation>

@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.xyx.landmark.R
+import com.xyx.landmark.vo.updateUserInfo
 
 class CheckAuthFragment : Fragment() {
 
@@ -29,6 +30,7 @@ class CheckAuthFragment : Fragment() {
                 Toast.LENGTH_LONG
             ).show()
             findNavController().navigate(R.id.action_checkAuthFragment_to_mapFragment)
+            updateUserInfo(uid, displayName ?: uid)
         } ?: run { callAuth() }
     }
 

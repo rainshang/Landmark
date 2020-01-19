@@ -2,4 +2,5 @@
     <string name="app_name">Landmark</string>
     <string name="tip_account_info">You\'ve logged in as %1$s</string>
     <string name="tip_location_permission_err">%1$s cannot work without location permission</string>
+    <string name="tip_publish_successful">You\'ve published a new note at (%1$.5f, %2$.5f)</string>
 </resources>
