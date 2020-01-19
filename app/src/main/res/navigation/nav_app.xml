@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/checkAuthFragment"
-        android:name="com.xyx.landmark.ui.CheckAuthFragment"
+        android:name="com.xyx.landmark.ui.CheckAuthAndPermissionFragment"
         android:label="CheckAuthFragment">
         <action
             android:id="@+id/action_checkAuthFragment_to_mapFragment"
