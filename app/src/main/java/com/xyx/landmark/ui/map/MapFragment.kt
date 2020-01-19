@@ -11,11 +11,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.xyx.landmark.R
 import com.xyx.landmark.vo.User
 import kotlinx.android.synthetic.main.fragment_map.*
@@ -26,7 +32,8 @@ class MapFragment : Fragment() {
 
     private lateinit var map: GoogleMap
     private var lastLocation: Location? = null
-//    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
+    private val viewModel: MapViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,17 +56,13 @@ class MapFragment : Fragment() {
                         val latLng = LatLng(location.latitude, location.longitude)
                         animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16f))
 
-//                        val marker = addMarker(
-//                            MarkerOptions().position(latLng)
-//                                .title("Test")
-//                        )
-//                        setOnMarkerClickListener {
-//                            Snackbar.make(fab, it.title, Snackbar.LENGTH_SHORT).show()
-//                            true
-//                        }
+                        setOnMarkerClickListener { false }
                     }
                 }
             }
+            viewModel.allNotes.observe(
+                viewLifecycleOwner,
+                Observer { notes -> updateMarkers(notes) })
         }
         fab.apply {
             isEnabled = lastLocation != null
@@ -76,6 +79,28 @@ class MapFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun updateMarkers(notes: List<User.Note>) {
+        map.clear()
+        notes.forEach {
+            map.addMarker(
+                MarkerOptions().position(LatLng(it.loc!!.lat!!, it.loc.lng!!))
+                    .title(it.name)
+                    .snippet(it.content)
+                    .icon(getIcon(it.uid))
+            )
+        }
+    }
+
+    private fun getIcon(uid: String?): BitmapDescriptor {
+        return BitmapDescriptorFactory.defaultMarker(
+            if (FirebaseAuth.getInstance().currentUser?.uid == uid)
+                BitmapDescriptorFactory.HUE_GREEN
+            else
+                BitmapDescriptorFactory.HUE_VIOLET
+        )
+
     }
 
     private fun checkPermission(): Boolean {

@@ -16,13 +16,11 @@ class CheckAuthFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
     }
 
     override fun onResume() {
         super.onResume()
-        // Check if user is signed in (non-null) and update UI accordingly.
         auth.currentUser?.run {
             Toast.makeText(
                 context?.applicationContext,
@@ -35,12 +33,10 @@ class CheckAuthFragment : Fragment() {
     }
 
     private fun callAuth() {
-        // Choose authentication providers
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build()
         )
 
-        // Create and launch sign-in intent
         startActivity(
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
