@@ -7,6 +7,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.xyx.landmark.vo.COLLECTION
 import com.xyx.landmark.vo.User
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MapViewModel : ViewModel() {
 
@@ -16,6 +17,8 @@ class MapViewModel : ViewModel() {
             emit(docs2Notes(it))
         }
     }
+    private val _searchNotes = MutableLiveData<List<User.Note>>()
+    val searchNotes: LiveData<List<User.Note>> = _searchNotes
 
     init {
         FirebaseFirestore.getInstance()
@@ -48,6 +51,21 @@ class MapViewModel : ViewModel() {
             }
         }
         return notes
+    }
+
+    fun search(keyword: String) {
+        allNotes.value?.run {
+            viewModelScope.launch(Dispatchers.Default) {
+                val notes = mutableListOf<User.Note>()
+                forEach { if (it.containsKeyword(keyword)) notes.add(it) }
+                _searchNotes.postValue(notes)
+            }
+        }
+    }
+
+    private fun User.Note.containsKeyword(keyword: String): Boolean {
+        return name?.contains(keyword) ?: false
+                || content?.contains(keyword) ?: false
     }
 
 }

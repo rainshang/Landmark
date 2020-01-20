@@ -56,9 +56,10 @@ class MapFragment : Fragment() {
                     }
                 }
             }
-            viewModel.allNotes.observe(
-                viewLifecycleOwner,
-                Observer { notes -> updateMarkers(notes) })
+            viewModel.apply {
+                allNotes.observe(viewLifecycleOwner, Observer { notes -> updateMarkers(notes) })
+                searchNotes.observe(viewLifecycleOwner, Observer { notes -> updateMarkers(notes) })
+            }
         }
         fab.apply {
             isEnabled = lastLocation != null
@@ -104,7 +105,9 @@ class MapFragment : Fragment() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchView.clearFocus()
-                // TODO search keywords and refresh markers
+                if (!query.isNullOrEmpty()) {
+                    viewModel.search(query)
+                }
                 return false
             }
 
@@ -112,6 +115,10 @@ class MapFragment : Fragment() {
                 return false
             }
         })
+        searchView.setOnCloseListener {
+            viewModel.allNotes.value?.run { updateMarkers(this) } // load all
+            false
+        }
     }
 
 }
